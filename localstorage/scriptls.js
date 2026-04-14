@@ -1,49 +1,46 @@
 let ImageURL = document.getElementById("ImageURL");
-let Nama = document.getElementById("Nama");
-let NPM = document.getElementById("NPM");
+let NamaBarang = document.getElementById("NamaBarang");
+let JumlahBarang = document.getElementById("JumlahBarang");
 
 function simpan() {
     console.log(ImageURL.value)
-    console.log(Nama.value)
-    console.log(NPM.value)
-
-    // localStorage.setItem("NPM", NPM.value)
-    // localStorage.setItem("Nama", Nama.value)
+    console.log(NamaBarang.value)
+    console.log(JumlahBarang.value)
 
     // jika local storage belum ada isi/value 
-    if(localStorage.getItem("mahasiswa")===null){
+    if(localStorage.getItem("Barang")===null){
         // simpan array kosong []
-        localStorage.setItem("mahasiswa", "[]")
+        localStorage.setItem("Barang", "[]")
     }
 
     // panggil local storage (konversi string --> object)
-    let data = JSON.parse(localStorage.getItem("mahasiswa"))
+    let data = JSON.parse(localStorage.getItem("Barang"))
     console.log(data)
 
-    // simpan value npm dan nama ke dalam object data
+    // simpan value jumlah dan nama ke dalam object data
     data.push({
         ImageURL: ImageURL.value,
-        nama: Nama.value,
-        npm: NPM.value,
+        NamaBarang: NamaBarang.value,
+        JumlahBarang: JumlahBarang.value,
     })
     console.log(data)
 
     // simpan data terbaru ke dalam local storage 
-    // konversi dari object menjadu string
-    localStorage.setItem("mahasiswa", JSON.stringify(data))
+    // konversi dari object menjadi string
+    localStorage.setItem("Barang", JSON.stringify(data))
     tampil()
 }
 
 function tampil() {
     //panggil dulu local storage
-    let hasil = JSON.parse(localStorage.getItem("mahasiswa"))
+    let hasil = JSON.parse(localStorage.getItem("Barang"))
 
-    // clear element ul id =list-mhs
-    document.getElementById("list-mhs").innerHTML = ""
+    // clear element ul id =list-barang
+    document.getElementById("list-barang").innerHTML = ""
     //lakukkan perulangan (foreach)
     hasil.forEach(element => {
         //console.log(element)
-        document.getElementById("list-mhs").innerHTML += `<div class="col-lg-4 col-md-6"> <img src="${element.ImageURL}" class="img-fluid"> <h4 class="text-primary">${element.nama}</h4> <h6 class="text-danger">${element.npm}</h6> </div>`
+        document.getElementById("list-barang").innerHTML += `<div class="col-lg-4 col-md-6"> <img src="${element.ImageURL}" class="img-fluid"> <h4 class="text-primary">${element.NamaBarang}</h4> <h6 class="text-danger">${element.JumlahBarang}</h6> </div>`
         
     });
 
